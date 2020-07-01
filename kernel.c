@@ -55,7 +55,7 @@ void term_putc(char c) {
 
 void term_print(const char* str) {
     for (size_t i = 0; str[i] != '\0'; i++) {
-        trem_putc(str[i]);
+        term_putc(str[i]);
     }
 }
 

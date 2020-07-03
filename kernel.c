@@ -25,7 +25,7 @@ void term_init() {
     }
 }
 
-void term_putc(char c) {
+void term_putc(char c, uint8_t color) {
     switch (c) {
         case '\n':
             {
@@ -36,7 +36,7 @@ void term_putc(char c) {
         default:
             {
                 const size_t index = (VGA_COLS * term_row) + term_col;
-                vga_buffer[index] = ((uint16_t)term_color << 8) | c;
+                vga_buffer[index] = ((uint16_t)color << 8) | c;
                 term_col++;
                 break;
             }
@@ -55,7 +55,7 @@ void term_putc(char c) {
 
 void term_print(const char* str) {
     for (size_t i = 0; str[i] != '\0'; i++) {
-        term_putc(str[i]);
+        term_putc(str[i], 0x00 + (i % 14) + 2);
     }
 }
 
